@@ -10,11 +10,11 @@ Dom e organização de código em um projeto real de desinvolvimento. O jogador 
 
 # Regras
 
-o jogador tera 6 tentativas
-quando vc acertar a letra ela sera registrada na tela
-quando o jogador erra a letra a seu numero de tentativa diminuir
-se as tentaivas acabar sera exibido na tela "DERROTA"
-se o jogador acertar a palavra sera exibido na tela "VITÓRIA"
-o jogo só ira mostrar a palavra oculta quando for o fim do jogo, ou a vitória
+o jogador tera 6 tentativas,
+quando vc acertar a letra ela sera registrada na tela,
+quando o jogador erra a letra a seu numero de tentativa diminuira,
+se as tentaivas acabar sera exibido na tela "DERROTA",
+se o jogador acertar a palavra sera exibido na tela "VITÓRIA",
+o jogo só ira mostrar a palavra oculta quando for o fim do jogo, ou a vitória.
 
 
