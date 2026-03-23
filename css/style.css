@@ -1,44 +1,44 @@
  
 
-.container{
+.container {
     padding: 15px;
     border-radius: 20px;
     width: 500px;
-    background:#4e063c;
+    background: #4e063c;
     color: rgb(217, 192, 240);
-    margin: 5%;  
+    margin: 5%;
     border-style: solid;
-    box-shadow: 
-    0 0 15px #dba1db,
-    0 0 30px rgb(194, 154, 238),
-    0 0 60px rgb(121, 16, 121);
+    box-shadow:
+        0 0 15px #dba1db,
+        0 0 30px rgb(194, 154, 238),
+        0 0 60px rgb(121, 16, 121);
 }
- 
 
-h1{
+h1 {
     color: #fc27c7;
     text-align: center;
     margin: 2%;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    box-shadow: #fc27c7;
+    /* CORREÇÃO 10: box-shadow: #fc27c7 não faz nada: box-shadow precisa de
+       tamanho (ex: 0 0 10px). Substituído por text-shadow que funciona em títulos */
+    text-shadow: 0 0 10px #fc27c7;
 }
 
-
-p{
+p {
     font-kerning: auto;
     text-align: center;
-    color:white;
-
+    color: white;
 }
 
-.iniciaçao{
+.iniciaçao {
     text-align: center;
     font-variant: inherit;
 }
 
-
-body{
-    height: 100ch;
+body {
+    /* CORREÇÃO 11: height:100ch estava errado: "ch" é unidade de largura de caractere,
+       não altura de tela. O correto para ocupar a tela toda é min-height:100vh */
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,16 +46,15 @@ body{
     text-align: center;
 }
 
-button:hover{
+button:hover {
     background: #ec86ce;
     border-radius: 4px;
     color: #570442;
-    align-items:center;
+    align-items: center;
 }
 
-input:focus{
+input:focus {
     border-radius: 7px;
-    
 }
 
 /* Container das letras */
@@ -63,8 +62,9 @@ input:focus{
     margin-bottom: 20px; /* Controla o espaço abaixo da palavra */
     display: flex;
     justify-content: center;
-    gap: 10px;          /* Espaço entre cada letra (_) */
-    font-size: 2rem;    /* Deixa as letras maiores */
+    gap: 10px;           /* Espaço entre cada letra (_) */
+    font-size: 2rem;     /* Deixa as letras maiores */
+    flex-wrap: wrap;     /* CORREÇÃO 12: palavras longas saíam do container sem isso */
 }
 
 /* Ajuste no input para não ficar colado */
@@ -80,4 +80,3 @@ input:focus{
     border-bottom: 2px solid rgb(163, 52, 139); /* Cria aquela linha de "enforcado" estilosa */
     min-width: 20px;
 }
- 

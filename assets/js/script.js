@@ -1,5 +1,5 @@
-//criando uma lista array com as palavras ocultas
-const listaPalavras = [
+ // criando uma lista array com as palavras ocultas
+ const listaPalavras = [
     "document", "desenvolvimento", "capacidade", "inteligencia", "computacao", "variavel", "funcao", "javascript", "css", "getelementbyid" // 10 palavras
     // botando as regras do jogo
 ];
@@ -12,13 +12,16 @@ let palavraExibida = [];//armazena letras corretas
 let pontuacao = 0;// pontuacao serve para o usario ter uma extimativa de quantas palavras ele acertou
 
 
-//capturando os IDS do HTML para que o JAVASCRIPT saiba onde "escrever"
+// capturando os IDS do HTML para que o JAVASCRIPT saiba onde "escrever"
 const displayPalavra = document.getElementById("palavra-oculta");
 const displayTentativas = document.getElementById("tentativas");
 const displayPontuacao = document.getElementById("pontuacao");
 const btnReiniciar = document.getElementById("btn-reiniciar");
 const displayEntrada = document.getElementById("entrada-letra");
-const displayLetrasUsadas = document.getElementById("letras-usadas")
+const displayLetrasUsadas = document.getElementById("letras-usadas");
+
+// CORREÇÃO 1: também capturando o botão ENVIAR que estava sem listener
+const btnTentar = document.getElementById("btn-tentar");
 
 // variavel DISPLAY e utilizada para manipular o css de elementos em HTML
 
@@ -27,11 +30,10 @@ const displayLetrasUsadas = document.getElementById("letras-usadas")
 function iniciarJogo() {
     //isso faz o navegador reiniciar a pagina automaticamente
 
-
     //Math.random(): Gera o número quebrado nunca chegar em 1 inteiro
     // Math.floor arredonda sempre para baixo (3.9 vira 3).
     const posicaoSorteDaListaDePalavras = Math.floor(Math.random() * listaPalavras.length)
-    //pegando a palavra  sorteada, e colocando ela em MAIUSCULA
+    // pegando a palavra sorteada, e colocando ela em MAIUSCULA
     palavraSecreta = listaPalavras[posicaoSorteDaListaDePalavras].toUpperCase()
 
     // --- EXPLICAÇÃO DA PALAVRA OCULTA ---
@@ -40,9 +42,13 @@ function iniciarJogo() {
     palavraExibida = Array(palavraSecreta.length).fill("_");
 
     // RESET: Limpamos os dados de tentativas anteriores.
-    displayTentativas = 6;
-    displayLetrasUsadas = [];
-    displayPontuacao= 0;
+    // CORREÇÃO 2: as variáveis de reset estavam erradas: usavam os nomes dos
+    // elementos HTML (displayTentativas, displayLetrasUsadas, displayPontuacao)
+    // em vez das variáveis de estado (tentativasRestantes, letrasUsadas, pontuacao).
+    // Atribuir valor a um elemento HTML assim não funciona e gerava erro silencioso.
+    tentativasRestantes = 6;
+    letrasUsadas = [];
+    pontuacao = 0;
 
     // Após preparar os dados, chamamos a função que desenha no ecrã.
     renderizarPalavra();
@@ -50,15 +56,18 @@ function iniciarJogo() {
 
 function renderizarPalavra() {
 
-    // trasforma a lista(array) que esta assim "-" "-" "-" "-" em "------"
-    displayPalavra.innerHTML = "_";
-
+    // CORREÇÃO 3: estava colocando innerHTML = "_" fixo antes de criar os spans,
+    // o que deixava um  "_" sobrando antes das letras. O correto é limpar
+    // com "" para depois os spans do forEach preencherem tudo corretamente.
+    displayPalavra.innerHTML = "";
 
     // B. CRIAÇÃO DINÂMICA:
     // Percorremos o array de traços (palavraExibida). Para cada "_" criamos um <span> novo.
     palavraExibida.forEach(letra => {
         const span = document.createElement("span"); // Cria a tag <span> no ar.
-        span.innerText = letra + "_";                   // Coloca o "_" dentro dela.
+        span.innerText = letra;                       // CORREÇÃO 4: estava letra + "_",
+                                                      // o que duplicava o underscore
+                                                      // mostrando "__" em vez de "_"
         displayPalavra.appendChild(span);             // Coloca o <span> dentro do HTML.
     });
 
@@ -66,10 +75,16 @@ function renderizarPalavra() {
     // Escrevemos os valores atuais nos campos de texto do HTML.
     displayTentativas.innerText = tentativasRestantes;
     displayPontuacao.innerText = pontuacao;
+
+    // CORREÇÃO 5: letrasUsadas não era atualizada na tela: faltava essa linha
+    displayLetrasUsadas.innerText = letrasUsadas.join(" ");
 }
 
 // OUVINTE: Quando o utilizador clica no botão, o jogo recomeça do zero.
 btnReiniciar.addEventListener("click", iniciarJogo);
+
+// CORREÇÃO 6: o botão ENVIAR não tinha listener: clicava e nada acontecia
+btnTentar.addEventListener("click", tentativas);
 
 // EXECUÇÃO IMEDIATA: Chama a função ao abrir a página para o jogo não começar vazio.
 iniciarJogo();
@@ -79,23 +94,26 @@ iniciarJogo();
 
 // capturando os cliques
 
-function tentativas(){
+function tentativas() {
     let letra = displayEntrada.value.toUpperCase();
 
-    if(letra === ""){
+    if (letra === "") {
         return;
     }
 
-    if(letrasUsadas.includes(letra)){
+    // CORREÇÃO 7: estava verificando em letrasTentadas (array nunca usado/populado)
+    // em vez de letrasUsadas, que é o array correto onde as letras são guardadas
+    if (letrasUsadas.includes(letra)) {
         return;
     }
 
     letrasUsadas.push(letra);
 
-    if(palavraSecreta.includes(letra)){
-        for(let i = 0; i < palavraSecreta.length; i++){
-            if(palavraSecreta[i] === letra){
+    if (palavraSecreta.includes(letra)) {
+        for (let i = 0; i < palavraSecreta.length; i++) {
+            if (palavraSecreta[i] === letra) {
                 palavraExibida[i] = letra;
+                pontuacao += 10; // CORREÇÃO 8: pontuação não era incrementada ao acertar
             }
         }
     } else {
@@ -105,10 +123,20 @@ function tentativas(){
     displayEntrada.value = "";
 
     renderizarPalavra();
-}
-}
- 
 
-// verificar se acertou a letra, verificar se ela completou a palavra,tendo isso tudo ela venceu,
-// verificar se a pessoa errou a letra, e verificar se tem tentativas se nao tiver gamer over, se nao continua o jogo
-// verificar se a letra estana palavra secreta se a letra estiver tem que ver a posicao que  a palvra ta (index) se ela nao tiber remover uma tentaivas
+    // verificar se acertou a letra, verificar se ela completou a palavra,tendo isso tudo ela venceu,
+    // verificar se a pessoa errou a letra, e verificar se tem tentativas se nao tiver gamer over, se nao continua o jogo
+    // verificar se a letra estana palavra secreta se a letra estiver tem que ver a posicao que a palvra ta (index) se ela nao tiber remover uma tentaivas
+    verificarFim();
+}
+
+// CORREÇÃO 9: função verificarFim estava ausente: sem ela o jogo nunca terminava
+function verificarFim() {
+    if (!palavraExibida.includes("_")) {
+        alert("Você ganhou! Pontuação: " + pontuacao);
+        return;
+    }
+    if (tentativasRestantes === 0) {
+        alert("Game over! A palavra era: " + palavraSecreta);
+    }
+}

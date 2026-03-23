@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>palavra secreta</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon"
-        href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3FycZRADUe-HqK-_VLLSGhXh4xCKsDb9iMw&s">
-
-
-
+    <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3FycZRADUe-HqK-_VLLSGhXh4xCKsDb9iMw&s">
 </head>
-
 <body>
-
-
     <section>
         <button type="submit" id="btn-reiniciar"> REINICIAR</button>
     </section>
+
     <div class="container">
-
         <p>Bem-vindo ao jogo, agora tente a advinhar as palavras!</p>
-        <div id="palavra-oculta" class="palavra-container">
-            <span d+
-            </div>
-            <div id="iniciacao">
-                <input type="text" id="entrada-letra" placeholder="letra" maxlength="1">
-                <button type="button" id="btn-tentar"> ENVIAR</button>
-                <section class="status">
-                    <p> tentativas restantes: <span id="tentativas"></span></p>
-                    <p> pontuação: <span id="pontuacao"></span></p>
-                    <p> Letras usadas: <span id="letras-usadas"></span></p>
-                    <!---<div> (Block): É como uma caixa grande. Ela ocupa a largura toda e "pula uma linha" automaticamente.
-            <span> (Inline): É como uma etiqueta. Ela fica dentro da linha, ocupando apenas o espaço necessário do conteúdo.!-->
-                </section>
-            </div>
-            <script src="assets/js/script.js"></script>
-</body>
 
+        <!-- CORREÇÃO 13: havia um <span d+__</div__> dentro da div: era HTML inválido
+             que quebrava a renderização da palavra. Removido. -->
+        <div id="palavra-oculta" class="palavra-container"></div>
+
+        <!-- CORREÇÃO 14: a div de iniciacao estava aninhada DENTRO de palavra-oculta,
+             misturando o container da palavra com os controles do jogo. Separado. -->
+        <div id="iniciacao">
+            <input type="text" id="entrada-letra" placeholder="letra" maxlength="1">
+            <button type="button" id="btn-tentar"> ENVIAR</button>
+
+            <section class="status">
+                <p>tentativas restantes: <span id="tentativas"></span></p>
+                <p>pontuação: <span id="pontuacao"></span></p>
+                <p>Letras usadas: <span id="letras-usadas"></span></p>
+
+                <!---<div> (Block): É como uma caixa grande. Ela ocupa a largura toda e "pula uma linha" automaticamente.
+                    <span> (Inline): É como uma etiqueta. Ela fica dentro da linha, ocupando apenas o espaço necessário do conteúdo.!-->
+            </section>
+        </div>
+    </div>
+
+    <!-- CORREÇÃO 15: a tag </body> estava faltando fechar corretamente e o script
+         estava dentro do container em vez de antes do </body> -->
+    <script src="assets/js/script.js"></script>
+</body>
 </html>
