@@ -1,0 +1,83 @@
+ 
+
+.container{
+    padding: 15px;
+    border-radius: 20px;
+    width: 500px;
+    background:#4e063c;
+    color: rgb(217, 192, 240);
+    margin: 5%;  
+    border-style: solid;
+    box-shadow: 
+    0 0 15px #dba1db,
+    0 0 30px rgb(194, 154, 238),
+    0 0 60px rgb(121, 16, 121);
+}
+ 
+
+h1{
+    color: #fc27c7;
+    text-align: center;
+    margin: 2%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    box-shadow: #fc27c7;
+}
+
+
+p{
+    font-kerning: auto;
+    text-align: center;
+    color:white;
+
+}
+
+.iniciaçao{
+    text-align: center;
+    font-variant: inherit;
+}
+
+
+body{
+    height: 100ch;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5c0f5;
+    text-align: center;
+}
+
+button:hover{
+    background: #ec86ce;
+    border-radius: 4px;
+    color: #570442;
+    align-items:center;
+}
+
+input:focus{
+    border-radius: 7px;
+    
+}
+
+/* Container das letras */
+.palavra-container {
+    margin-bottom: 20px; /* Controla o espaço abaixo da palavra */
+    display: flex;
+    justify-content: center;
+    gap: 10px;          /* Espaço entre cada letra (_) */
+    font-size: 2rem;    /* Deixa as letras maiores */
+}
+
+/* Ajuste no input para não ficar colado */
+#entrada-letra {
+    padding: 10px;
+    width: 50px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Estilo para cada letra individual */
+.palavra-container span {
+    border-bottom: 2px solid rgb(163, 52, 139); /* Cria aquela linha de "enforcado" estilosa */
+    min-width: 20px;
+}
+ 

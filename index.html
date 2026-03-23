@@ -6,25 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>palavra secreta</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon"
+        href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3FycZRADUe-HqK-_VLLSGhXh4xCKsDb9iMw&s">
+
+
+
 </head>
 
 <body>
+
+
+    <section>
+        <button type="submit" id="btn-reiniciar"> REINICIAR</button>
+    </section>
     <div class="container">
-        <h1> palavra secreta</h1>
+
         <p>Bem-vindo ao jogo, agora tente a advinhar as palavras!</p>
-        <div>
-            <span>_</span> <span>_</span> <span>_</span> <span>_</span> <span>_</span> 
-            <br></br>
-        </div>
-        <input type="text">
-        <button type="submit"> ENVIAR</button>
-        <section class="status">
-            <p> tentivas restantes: <span id="tentativas">6</span></p>
-            <p> pontuação: <span id="pontuacao">0</span></p>
-            <p> Letras usadas: <span id="letras-erradas">A</span></p>
-        </section>
-    </div>
+        <div id="palavra-oculta" class="palavra-container">
+            <span d+
+            </div>
+            <div id="iniciacao">
+                <input type="text" id="entrada-letra" placeholder="letra" maxlength="1">
+                <button type="button" id="btn-tentar"> ENVIAR</button>
+                <section class="status">
+                    <p> tentativas restantes: <span id="tentativas"></span></p>
+                    <p> pontuação: <span id="pontuacao"></span></p>
+                    <p> Letras usadas: <span id="letras-usadas"></span></p>
+                    <!---<div> (Block): É como uma caixa grande. Ela ocupa a largura toda e "pula uma linha" automaticamente.
+            <span> (Inline): É como uma etiqueta. Ela fica dentro da linha, ocupando apenas o espaço necessário do conteúdo.!-->
+                </section>
+            </div>
+            <script src="assets/js/script.js"></script>
 </body>
 
 </html>
